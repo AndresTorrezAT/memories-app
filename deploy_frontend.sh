@@ -1,11 +1,14 @@
 #!/bin/bash
 
+# Iniciar ssh-agent y agregar la clave privada
+eval $(ssh-agent -s) && ssh-add ~/.ssh/github
+
 # Directorio donde se clonará el repositorio
 FRONTEND_DIR="./frontend/memories-app-frontend"
 
-# Clonamos el repositorio de GitHub
+# Clonamos el repositorio de GitHub usando SSH
 echo "Clonando el repositorio del Frontend..."
-git clone https://github.com/AndresTorrezAT/memories-app-frontend.git $FRONTEND_DIR
+git clone git@github.com:AndresTorrezAT/memories-app-frontend.git $FRONTEND_DIR
 
 # Entramos al directorio del frontend
 cd $FRONTEND_DIR
@@ -26,4 +29,4 @@ yarn run build
 # echo "Ejecutando el contenedor..."
 # docker run -d -p 80:80 memories-frontend
 
-echo "Frontend desplegado exitosamente en el contenedor Docker."
+echo "Frontend desplegado exitosamente."
